@@ -33,7 +33,58 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         }
         adapter = new MyAdapter();
         rListView.setAdapter(adapter);
+
+        //可以用这种注册监听的方式,这种方式需要实现MainActivity  implements OnRefreshListener
         rListView.setOnRefreshListener(this);
+
+        //也可以用这种注册监听的方式
+       /* rListView.setOnRefreshListener(new OnRefreshListener() {
+
+            @Override
+            public void onDownPullRefresh() {
+                new AsyncTask<Void, Void, Void>() {
+
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        SystemClock.sleep(2000);
+                        for (int i = 0; i < 2; i++) {
+                            textList.add(0, "这是下拉刷新出来的数据" + i);
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void result) {
+                        adapter.notifyDataSetChanged();
+                        rListView.hideHeaderView();
+                    }
+                }.execute(new Void[]{});
+            }
+
+            @Override
+            public void onLoadingMore() {
+                new AsyncTask<Void, Void, Void>() {
+
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        SystemClock.sleep(5000);
+
+                        textList.add("这是加载更多出来的数据1");
+                        textList.add("这是加载更多出来的数据2");
+                        textList.add("这是加载更多出来的数据3");
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void result) {
+                        adapter.notifyDataSetChanged();
+
+                        // 控制脚布局隐藏
+                        rListView.hideFooterView();
+                    }
+                }.execute(new Void[]{});
+            }
+        });*/
     }
 
     private class MyAdapter extends BaseAdapter {
@@ -67,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         }
 
     }
+
+
 
     @Override
     public void onDownPullRefresh() {
@@ -112,4 +165,5 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
             }
         }.execute(new Void[]{});
     }
+
 }
