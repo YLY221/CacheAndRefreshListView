@@ -1,0 +1,2 @@
+# CacheAndRefreshListView
+这是一个关于ListView的小Demo，Demo大致分为两部分，第一部分主要解决了ListView加载图片乱序问题，第二部分主要实现了ListView下拉刷新
