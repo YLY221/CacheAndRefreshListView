@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        rListView=findViewById(R.id.list_view);
         ImageAdapter imageAdapter=new ImageAdapter(this,0,Images.imageUrls);
         rListView.setAdapter(imageAdapter);
 
