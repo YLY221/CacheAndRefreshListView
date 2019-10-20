@@ -3,6 +3,7 @@ package com.example.testdemo;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -84,15 +85,6 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
         initAnimation();
     }
 
-    /**
-     * 获得系统的最新时间
-     *
-     * @return
-     */
-    private String getLastUpdateTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(System.currentTimeMillis());
-    }
 
     /**
      * 初始化动画
@@ -137,6 +129,9 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                         refreshHeaderView();
                     }
                     // 下拉头布局
+                    if (paddingTop>dip2px(50)){
+                        paddingTop=dip2px(50);
+                    }
                     headerView.setPadding(0, paddingTop, 0, 0);
                     return true;
                 }
@@ -261,5 +256,19 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     public void hideFooterView() {
         footerView.setPadding(0, -footerViewHeight, 0, 0);
         isLoadingMore = false;
+    }
+
+    /**
+     * 获得系统的最新时间
+     *
+     * @return
+     */
+    private String getLastUpdateTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(System.currentTimeMillis());
+    }
+
+    private int dip2px(int dip){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dip,getResources().getDisplayMetrics());
     }
 }
